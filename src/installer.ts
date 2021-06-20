@@ -59,7 +59,7 @@ export async function getGraalVM(
   if (toolPath) {
     core.debug(`GraalVM found in cache ${toolPath}`)
   } else {
-    const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm-${platform}-gluon-${graalvmShort}.zip`
+    const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm-${platform}-${graalvmShort}.zip`
 
     core.info(`Downloading Gluon's GraalVM from ${downloadPath}`)
 
