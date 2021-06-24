@@ -92,7 +92,7 @@ function getGraalVM(graalvm) {
             core.debug(`GraalVM found in cache ${toolPath}`);
         }
         else {
-            const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm-${platform}-${graalvmShort}.zip`;
+            const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm-${platform}-gluon-${graalvmShort}.zip`;
             core.info(`Downloading Gluon's GraalVM from ${downloadPath}`);
             const graalvmFile = yield tc.downloadTool(downloadPath);
             const tempDir = path.join(tempDirectory, `temp_${Math.floor(Math.random() * 2000000000)}`);
