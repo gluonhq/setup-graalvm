@@ -17,7 +17,9 @@ steps:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     # GraalVM version. Default: latest
-    graalvm: '21.1.0-dev-20210415_0700'
+    graalvm: '22.0.0.2-Final'
+    # Java version. Since GraalVM 22, either java11 or java17, before GraalVM 22, empty.
+    jdk: 'java17'
 - run: java -version
 ```
 

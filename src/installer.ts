@@ -36,7 +36,8 @@ if (IS_WINDOWS) {
 }
 
 export async function getGraalVM(
-  graalvm: string
+    graalvm: string,
+    jdk: string
 ): Promise<void> {
   let version = `${graalvm}`
   if (version === 'latest') {
@@ -45,12 +46,14 @@ export async function getGraalVM(
       repo: 'graal'
     })
     version = response.data.tag_name
+  } else {
+    version = `gluon-${graalvm}`
   }
   let graalvmShort = `${version}`
   if (version.includes('-dev-')) {
     graalvmShort = version.substr(0, version.indexOf('-dev-') + 4)
   }
-
+  core.info(`Version of graalvm: ${version}, short: ${graalvmShort}`)
   let toolPath = tc.find('GraalVM', getCacheVersionString(version), "amd64")
 
   const allGraalVMVersions = tc.findAllVersions('GraalVM')
@@ -59,7 +62,11 @@ export async function getGraalVM(
   if (toolPath) {
     core.debug(`GraalVM found in cache ${toolPath}`)
   } else {
-    const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm-${platform}-${graalvmShort}.zip`
+    let java = ``
+    if (jdk == 'java17' || jdk == 'java11') {
+      java = `-${jdk}`
+    }
+    const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-svm${java}-${platform}-${graalvmShort}.zip`
 
     core.info(`Downloading Gluon's GraalVM from ${downloadPath}`)
 
