@@ -18,7 +18,7 @@ steps:
   with:
     # GraalVM version. Default: latest
     graalvm: '22.0.0.2-Final'
-    # Java version. Since GraalVM 22, either java11 or java17, before GraalVM 22, empty.
+    # Java version. Since GraalVM 22, either java11 or java17, before GraalVM 22, empty. Default: java17
     jdk: 'java17'
 - run: java -version
 ```
