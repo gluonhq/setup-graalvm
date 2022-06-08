@@ -9,8 +9,11 @@ inputs:
     description: 'The GraalVM version built by Gluon, defaults to latest'
     default: 'latest'
   jdk:
-    description: 'The JDK version used to build the GraalVM version. Possible values: java17 or java11, if GraalVM is 22+, else empty'
+    description: 'The JDK version used to build the GraalVM version. Possible values: java17 (default) or java11, if GraalVM is 22+, else empty'
     default: 'java17'
+  arch:
+    description: 'Architecture flag. Possible values: x86_64 (default) and aarch64. The latter is available only for M1 self-hosted runners and GraalVM 22.1+'
+    default: 'x86_64'
 runs:
   using: 'node12'
   main: 'dist/index.js'

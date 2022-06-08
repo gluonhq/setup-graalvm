@@ -6,8 +6,9 @@ async function run(): Promise<void> {
   try {
     const graalvm = core.getInput('graalvm')
     const jdk = core.getInput('jdk')
+    const arch = core.getInput('arch')
 
-    await installer.getGraalVM(graalvm, jdk)
+    await installer.getGraalVM(graalvm, jdk, arch)
 
     const matchersPath = path.join(__dirname, '..', '.github')
     core.info(`##[add-matcher]${path.join(matchersPath, 'graalvm.json')}`)

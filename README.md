@@ -17,9 +17,11 @@ steps:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     # GraalVM version. Default: latest
-    graalvm: '22.0.0.2-Final'
+    graalvm: '22.1.0.1-Final'
     # Java version. Since GraalVM 22, either java11 or java17, before GraalVM 22, empty. Default: java17
     jdk: 'java17'
+    # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available only for M1 self-hosted runners since GraalVM 22.1.
+    arch: 'x86_64'
 - run: java -version
 ```
 
