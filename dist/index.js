@@ -9511,7 +9511,7 @@ function getGraalVM(graalvm, jdk, arch) {
             const tempDir = path.join(tempDirectory, `temp_${Math.floor(Math.random() * 2000000000)}`);
             const graalvmDir = yield unzipGraalVMDownload(graalvmFile, tempDir);
             core.debug(`graalvm extracted to ${graalvmDir}`);
-            toolPath = yield tc.cacheDir(graalvmDir, 'GraalVM', getCacheVersionString(version));
+            toolPath = yield tc.cacheDir(graalvmDir, 'GraalVM', getCacheVersionString(version), arch);
         }
         const extendedJavaHome = `JAVA_HOME_${version}`;
         core.exportVariable('JAVA_HOME', toolPath);

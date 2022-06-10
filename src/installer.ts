@@ -91,8 +91,9 @@ export async function getGraalVM(
     core.debug(`graalvm extracted to ${graalvmDir}`)
     toolPath = await tc.cacheDir(
       graalvmDir,
-      'GraalVM',
-      getCacheVersionString(version)
+        'GraalVM',
+        getCacheVersionString(version),
+        arch
     )
   }
 
