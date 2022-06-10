@@ -9509,7 +9509,7 @@ function getGraalVM(graalvm, jdk, arch) {
             core.info(`Downloading Gluon's GraalVM from ${downloadPath}`);
             const graalvmFile = yield tc.downloadTool(downloadPath);
             const tempDir = path.join(tempDirectory, `temp_${Math.floor(Math.random() * 2000000000)}`);
-            const graalvmDir = yield unzipGraalVMDownload(graalvmFile, tempDir);
+            const graalvmDir = yield unpackGraalVMDownload(graalvmFile, tempDir);
             core.debug(`graalvm extracted to ${graalvmDir}`);
             toolPath = yield tc.cacheDir(graalvmDir, 'GraalVM', getCacheVersionString(version), arch);
         }
@@ -9537,7 +9537,12 @@ function extractFiles(file, destinationFolder) {
         else if (stats.isDirectory()) {
             throw new Error(`Failed to extract ${file} - it is a directory`);
         }
-        yield tc.extractZip(file, destinationFolder);
+        if (file.endsWith('zip')) {
+            yield tc.extractZip(file, destinationFolder);
+        }
+        else {
+            yield tc.extractTar(file, destinationFolder);
+        }
     });
 }
 function unpackJars(fsPath, javaBinPath) {
@@ -9562,7 +9567,7 @@ function unpackJars(fsPath, javaBinPath) {
         }
     });
 }
-function unzipGraalVMDownload(repoRoot, destinationFolder) {
+function unpackGraalVMDownload(repoRoot, destinationFolder) {
     return __awaiter(this, void 0, void 0, function* () {
         yield io.mkdirP(destinationFolder);
         const graalvmFile = path.normalize(repoRoot);

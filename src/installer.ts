@@ -84,7 +84,7 @@ export async function getGraalVM(
       tempDirectory,
       `temp_${Math.floor(Math.random() * 2000000000)}`
     )
-    const graalvmDir = await unzipGraalVMDownload(
+    const graalvmDir = await unpackGraalVMDownload(
       graalvmFile,
       tempDir
     )
@@ -123,7 +123,12 @@ async function extractFiles(
     throw new Error(`Failed to extract ${file} - it is a directory`)
   }
 
-  await tc.extractZip(file, destinationFolder)
+  if (file.endsWith('zip')) {
+    await tc.extractZip(file, destinationFolder)
+  } else {
+    await tc.extractTar(file, destinationFolder)
+  }
+  
 }
 
 async function unpackJars(fsPath: string, javaBinPath: string): Promise<void> {
@@ -146,7 +151,7 @@ async function unpackJars(fsPath: string, javaBinPath: string): Promise<void> {
   }
 }
 
-async function unzipGraalVMDownload(
+async function unpackGraalVMDownload(
   repoRoot: string,
   destinationFolder: string
 ): Promise<string> {
