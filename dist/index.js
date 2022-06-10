@@ -9487,7 +9487,7 @@ function getGraalVM(graalvm, jdk, arch) {
         }
         core.info(`Version of graalvm: ${version}, short: ${graalvmShort}`);
         let toolPath = tc.find('GraalVM', getCacheVersionString(version), arch);
-        const allGraalVMVersions = tc.findAllVersions('GraalVM');
+        const allGraalVMVersions = tc.findAllVersions('GraalVM', arch);
         core.info(`Versions of graalvm available: ${allGraalVMVersions}`);
         if (toolPath) {
             core.debug(`GraalVM found in cache ${toolPath}`);
