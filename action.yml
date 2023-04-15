@@ -15,5 +15,5 @@ inputs:
     description: 'Architecture flag. Possible values: x86_64 (default) and aarch64. The latter is available only for M1 self-hosted runners and GraalVM 22.1+'
     default: 'x86_64'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
