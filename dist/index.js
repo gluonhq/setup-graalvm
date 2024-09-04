@@ -9497,15 +9497,15 @@ function getGraalVM(graalvm, jdk, arch) {
             let m1 = ``;
             if (jdk == 'java23') {
                 java = `-${jdk}`;
-                m1 = `amd64`;
+                m1 = `-amd64`;
                 if (arch == 'aarch64') {
-                    m1 = `aarch64`;
+                    m1 = `-aarch64`;
                 }
             }
             else if (jdk == 'java17' || jdk == 'java11') {
                 java = `svm-${jdk}`;
                 if (arch == 'aarch64') {
-                    m1 = `m1`;
+                    m1 = `-m1`;
                 }
             }
             else {
@@ -9515,7 +9515,7 @@ function getGraalVM(graalvm, jdk, arch) {
             if (IS_WINDOWS || graalvmShort.startsWith('gluon-22.0') || graalvmShort.startsWith('gluon-21')) {
                 ext = 'zip';
             }
-            const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-${java}-${platform}-${m1}-${graalvmShort}.${ext}`;
+            const downloadPath = `https://github.com/gluonhq/graal/releases/download/${version}/graalvm-${java}-${platform}${m1}-${graalvmShort}.${ext}`;
             core.info(`Downloading Gluon's GraalVM from ${downloadPath}`);
             const graalvmFile = yield tc.downloadTool(downloadPath);
             const tempDir = path.join(tempDirectory, `temp_${Math.floor(Math.random() * 2000000000)}`);
