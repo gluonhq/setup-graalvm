@@ -9496,7 +9496,7 @@ function getGraalVM(graalvm, jdk, arch) {
             let java = ``;
             let m1 = ``;
             if (jdk == 'java23') {
-                java = `-${jdk}`;
+                java = `${jdk}`;
                 m1 = `-amd64`;
                 if (arch == 'aarch64') {
                     m1 = `-aarch64`;
