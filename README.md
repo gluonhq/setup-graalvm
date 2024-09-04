@@ -18,9 +18,9 @@ steps:
   with:
     # GraalVM version. Default: latest
     graalvm: '22.1.0.1-Final'
-    # Java version. Since GraalVM 22, either java11 or java17, before GraalVM 22, empty. Default: java17
-    jdk: 'java17'
-    # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available only for M1 self-hosted runners since GraalVM 22.1.
+    # Java version. Since GraalVM 22, either java11, java17 or java23. Before GraalVM 22, empty. Default: java23
+    jdk: 'java23'
+    # Architecture flag. Available options are 'x86_64' (default) and 'aarch64'. The latter is available for M1 runners starting GraalVM 22.1.
     arch: 'x86_64'
 - run: java -version
 ```
@@ -28,3 +28,13 @@ steps:
 # License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE)
+
+# Developers
+
+To build the action locally, run the following:
+
+```
+nmp install
+npm i -g @vercel/ncc
+ncc build src/setup-graalvm.ts -o dist
+```
